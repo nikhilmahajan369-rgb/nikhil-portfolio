@@ -300,6 +300,23 @@ header button[onclick="openContactModal()"]{animation:yellowPulse 4s ease-in-out
 @media(max-width:640px){header .h-20{height:68px!important}#tab-overview>div:first-child{padding:26px!important;min-height:unset}#tab-overview>div:first-child h2{font-size:clamp(2.7rem,13vw,4.5rem)!important}.glow-card,.project-card{border-radius:18px!important}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 </style>
+  <style>
+.project-tile:has(img[alt*="Swami Satyanand"])::after {
+  background: linear-gradient(
+    0deg,
+    rgba(3, 9, 23, 0.35),
+    rgba(3, 9, 23, 0.02) 65%
+  ) !important;
+}
+
+.project-tile:has(img[alt*="Swami Satyanand"]) .project-overlay {
+  background: linear-gradient(
+    0deg,
+    rgba(3, 9, 23, 0.15),
+    transparent
+  ) !important;
+}
+</style>
 </head>
   <style>
 .featured-work-section .project-tile:last-child .project-overlay {
