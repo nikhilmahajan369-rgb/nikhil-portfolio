@@ -301,6 +301,15 @@ header button[onclick="openContactModal()"]{animation:yellowPulse 4s ease-in-out
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 </style>
 </head>
+  <style>
+.featured-work-section .project-tile:last-child .project-overlay {
+  background: linear-gradient(
+    0deg,
+    rgba(3, 9, 23, 0.55),
+    rgba(3, 9, 23, 0.05)
+  ) !important;
+}
+</style>
 <body class="min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white custom-scrollbar relative">
 
   <!-- Background Ambient Floating Blobs -->
