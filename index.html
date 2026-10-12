@@ -90,7 +90,7 @@
       background-size: 250% auto;
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: gradientShift 6s linear infinite;
+      animation: gradientShift 8s linear infinite;
     }
     .gradient-blue {
       background: linear-gradient(120deg, #007aff, #00b4d8, #00d4ff, #007aff);
@@ -107,6 +107,61 @@
       animation: gradientShift 5s linear infinite;
     }
     @keyframes gradientShift { to { background-position: 250% center; } }
+
+    /* ===== SCROLL PROGRESS BAR ===== */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; height: 3px; z-index: 101;
+      background: linear-gradient(90deg, #007aff, #7c3aed, #e63992, #ff8c42);
+      background-size: 200% auto;
+      width: 0%; border-radius: 0 3px 3px 0;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 12px rgba(124,58,237,0.3);
+      animation: gradientShift 4s linear infinite;
+    }
+
+    /* ===== FLOATING ABSTRACT SHAPES ===== */
+    .float-shape {
+      position: fixed; border-radius: 50%; pointer-events: none; z-index: 0;
+      filter: blur(60px); opacity: 0.5;
+    }
+    .float-shape-1 {
+      width: 280px; height: 280px; top: 30%; right: 5%;
+      background: radial-gradient(circle, rgba(0,122,255,0.06), transparent 70%);
+      animation: floatDrift1 20s ease-in-out infinite alternate;
+    }
+    .float-shape-2 {
+      width: 220px; height: 220px; bottom: 20%; left: 3%;
+      background: radial-gradient(circle, rgba(124,58,237,0.05), transparent 70%);
+      animation: floatDrift2 24s ease-in-out infinite alternate;
+    }
+    .float-shape-3 {
+      width: 180px; height: 180px; top: 60%; right: 12%;
+      background: radial-gradient(circle, rgba(230,57,146,0.035), transparent 70%);
+      animation: floatDrift3 28s ease-in-out infinite alternate;
+    }
+    @keyframes floatDrift1 { 0% { transform: translate(0,0); } 100% { transform: translate(-40px,50px); } }
+    @keyframes floatDrift2 { 0% { transform: translate(0,0); } 100% { transform: translate(50px,-30px); } }
+    @keyframes floatDrift3 { 0% { transform: translate(0,0); } 100% { transform: translate(-30px,-40px); } }
+
+    /* ===== PAGE TRANSITION OVERLAY ===== */
+    .page-transition {
+      position: fixed; inset: 0; z-index: 300; pointer-events: none;
+      background: linear-gradient(120deg, rgba(0,122,255,0.03), rgba(124,58,237,0.03), rgba(230,57,146,0.02));
+      opacity: 0; transition: opacity 0.3s var(--ease);
+    }
+    .page-transition.active { opacity: 1; }
+
+    /* ===== CARD SHINE EFFECT ===== */
+    .card, .quick-card, .upload-card, .tile { position: relative; }
+    .card-shine {
+      position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.15), transparent);
+      transform: skewX(-20deg); pointer-events: none; z-index: 5;
+      transition: left 0.7s var(--ease-out);
+    }
+    .card:hover .card-shine, .quick-card:hover .card-shine, .upload-card:hover .card-shine, .tile:hover .card-shine {
+      left: 120%;
+    }
 
     /* ===== GRADIENT BUTTONS ===== */
     .gradient-btn-primary {
@@ -235,14 +290,17 @@
     .hero-glow-1 {
       width: 700px; height: 700px; top: 5%; left: 50%; transform: translateX(-50%);
       background: rgba(0,122,255,0.08); animation: glowDrift 14s ease-in-out infinite alternate;
+      will-change: transform;
     }
     .hero-glow-2 {
       width: 600px; height: 600px; bottom: 0%; left: 15%;
       background: rgba(124,58,237,0.06); animation: glowDrift 16s ease-in-out infinite alternate-reverse;
+      will-change: transform;
     }
     .hero-glow-3 {
       width: 500px; height: 500px; top: 20%; right: 10%;
       background: rgba(230,57,146,0.04); animation: glowDrift 18s ease-in-out infinite alternate;
+      will-change: transform;
     }
     @keyframes glowDrift {
       0% { transform: translate(0,0) scale(1); }
@@ -276,6 +334,7 @@
       box-shadow: 0 0 10px rgba(48,209,88,0.5);
       animation: dotPulse 2s ease-in-out infinite;
     }
+    .hero-badge .dot { will-change: opacity; }
     @keyframes dotPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
 
     .hero-title {
@@ -293,6 +352,7 @@
     .hero-title .line:nth-child(2) span { animation-delay: 0.42s; }
     .hero-title .gradient {
       filter: drop-shadow(0 4px 24px rgba(124,58,237,0.08));
+      will-change: background-position;
     }
     @keyframes lineReveal { to { opacity: 1; transform: translateY(0); } }
 
@@ -810,9 +870,9 @@
     .footer-links .spiritual:hover { color: var(--accent-violet); }
 
     /* ===== REVEAL ANIMATIONS ===== */
-    .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out); }
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-stagger > * { opacity: 0; transform: translateY(36px); transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out); }
+    .reveal-stagger > * { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out); }
     .reveal-stagger.visible > * { opacity: 1; transform: translateY(0); }
     .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0s; }
     .reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.09s; }
@@ -845,7 +905,8 @@
         scroll-behavior: auto !important;
       }
       .reveal, .reveal-stagger > * { opacity: 1; transform: none; }
-      .cursor-glow { display: none; }
+      .cursor-glow, .float-shape, .scroll-progress { display: none; }
+      .card-shine { display: none; }
     }
 
     @media (max-width: 600px) {
@@ -863,6 +924,17 @@
   <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
 </head>
 <body>
+
+  <!-- Scroll progress bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Floating abstract shapes -->
+  <div class="float-shape float-shape-1"></div>
+  <div class="float-shape float-shape-2"></div>
+  <div class="float-shape float-shape-3"></div>
+
+  <!-- Page transition overlay -->
+  <div class="page-transition" id="pageTransition"></div>
 
   <!-- Cursor glow -->
   <div class="cursor-glow" id="cursorGlow"></div>
@@ -960,6 +1032,7 @@
       </div>
       <div class="gallery reveal-stagger">
         <article class="tile tile-wide" data-link="https://canva.link/7f2xmlsh9fvt0ib">
+          <div class="card-shine"></div>
           <img src="assets/pepsi-concept.png" alt="Pepsi cola can visual design concept" class="parallax-img" loading="lazy">
           <span class="tile-index">01</span>
           <div class="tile-overlay">
@@ -969,6 +1042,7 @@
           </div>
         </article>
         <article class="tile tile-half" data-link="https://canva.link/bjdv4yrpnq9b3xz">
+          <div class="card-shine"></div>
           <img src="assets/ember-bean-concept.png" alt="Ember and Bean cold brew campaign design" class="parallax-img" loading="lazy">
           <span class="tile-index">02</span>
           <div class="tile-overlay">
@@ -978,6 +1052,7 @@
           </div>
         </article>
         <article class="tile tile-half" data-link="https://canva.link/ivdrrx0kma3fbn2">
+          <div class="card-shine"></div>
           <img src="assets/volterra-branding.png" alt="Volterra energy drink branding concept" class="parallax-img" loading="lazy">
           <span class="tile-index">03</span>
           <div class="tile-overlay">
@@ -987,6 +1062,7 @@
           </div>
         </article>
         <article class="tile tile-half" data-link="https://canva.link/3bqemu95rlmtpzk">
+          <div class="card-shine"></div>
           <img src="assets/north-oak-branding.png" alt="North and Oak botanical sparkling water brand concept" class="parallax-img" loading="lazy">
           <span class="tile-index">04</span>
           <div class="tile-overlay">
@@ -996,6 +1072,7 @@
           </div>
         </article>
         <article class="tile tile-half" data-link="https://canva.link/8nj6tda3vijb1or">
+          <div class="card-shine"></div>
           <img src="assets/nescafe-social-concept.png" alt="Nescafe social media campaign concept" class="parallax-img" loading="lazy">
           <span class="tile-index">05</span>
           <div class="tile-overlay">
@@ -1005,6 +1082,7 @@
           </div>
         </article>
         <article class="tile tile-banner" data-link="https://youtube.com/@bms-ke-laadle">
+          <div class="card-shine"></div>
           <img src="assets/bms-ke-laadle-banner.png" alt="Original BMS Ke Laadle channel banner" class="parallax-img" loading="lazy">
           <span class="tile-index">06</span>
           <div class="tile-overlay">
@@ -1015,6 +1093,7 @@
           </div>
         </article>
         <article class="tile tile-banner" data-link="https://youtube.com/@swamijibhaktidhara?si=rLdsQQqhp1zu_rgC">
+          <div class="card-shine"></div>
           <img src="assets/swami-banner-upload.jpg" alt="Original Swami Satyanand Bhakti Dhara banner" class="parallax-img" loading="lazy">
           <span class="tile-index">07</span>
           <div class="tile-overlay">
@@ -1041,6 +1120,7 @@
       </div>
       <div class="uploads-grid reveal-stagger">
         <a class="upload-card" href="https://canva.link/nsagwkvu5isrkh3" target="_blank" rel="noopener noreferrer">
+          <div class="card-shine"></div>
           <div class="upload-card-img-wrap"><img src="assets/star bucks.png" alt="Starbucks Social Media Campaign" loading="lazy"></div>
           <div class="upload-card-body">
             <h3>Starbucks Social Media Campaign</h3>
@@ -1049,6 +1129,7 @@
           </div>
         </a>
         <a class="upload-card" href="https://canva.link/g1adx3ywbmpbmd0" target="_blank" rel="noopener noreferrer">
+          <div class="card-shine"></div>
           <div class="upload-card-img-wrap"><img src="assets/aura and oak.png" alt="AURA and OAK Brand Identity" loading="lazy"></div>
           <div class="upload-card-body">
             <h3>AURA & OAK Brand Identity</h3>
@@ -1057,22 +1138,27 @@
           </div>
         </a>
         <div class="upload-card">
+          <div class="card-shine"></div>
           <div class="upload-card-img-wrap"><img src="assets/bms fitness logo.jpg" alt="BMS Fitness Logo" loading="lazy"></div>
           <div class="upload-card-body"><h3>BMS Fitness Logo</h3><p>Logo Design</p></div>
         </div>
         <div class="upload-card">
+          <div class="card-shine"></div>
           <div class="upload-card-img-wrap"><img src="assets/zumba schedule poster.jpg" alt="Zumba Class Schedule Poster" loading="lazy"></div>
           <div class="upload-card-body"><h3>Zumba Class Schedule Poster</h3><p>Poster Design</p></div>
         </div>
         <div class="upload-card">
+          <div class="card-shine"></div>
           <div class="upload-card-img-wrap"><img src="assets/Amritvani.jpg" alt="Shri Amritvani Satsang Poster" loading="lazy"></div>
           <div class="upload-card-body"><h3>Shri Amritvani Satsang Poster</h3><p>Devotional Poster</p></div>
         </div>
         <div class="upload-card">
+          <div class="card-shine"></div>
           <div class="upload-card-img-wrap"><img src="assets/bms collection.jpg" alt="BMS Collection Logo and Branding" loading="lazy"></div>
           <div class="upload-card-body"><h3>BMS Collection Logo & Branding</h3><p>Branding Design</p></div>
         </div>
         <div class="upload-card">
+          <div class="card-shine"></div>
           <div class="upload-card-img-wrap"><img src="assets/ybz.png" alt="YBZ Zumba Logo" loading="lazy"></div>
           <div class="upload-card-body"><h3>YBZ Zumba Logo</h3><p>Logo Design</p></div>
         </div>
@@ -1087,16 +1173,19 @@
       </div>
       <div class="quick-grid reveal-stagger">
         <div class="quick-card" onclick="switchTab('animation')">
+          <div class="card-shine"></div>
           <div class="quick-icon blue"><i class="fa-solid fa-clapperboard"></i></div>
           <h3>Animated Cartoons & GIFs</h3>
           <p>AI-driven animated storytelling, moral tales, character animation loops, and dynamic social GIFs.</p>
         </div>
         <div class="quick-card" onclick="switchTab('thumbnails')">
+          <div class="card-shine"></div>
           <div class="quick-icon teal"><i class="fa-solid fa-image"></i></div>
           <h3>Thumbnails & Posters</h3>
           <p>High-CTR YouTube thumbnails, vibrant marketing posters, and eye-catching promotional banners.</p>
         </div>
         <div class="quick-card" onclick="switchTab('branding')">
+          <div class="card-shine"></div>
           <div class="quick-icon purple"><i class="fa-solid fa-palette"></i></div>
           <h3>Canva Pro Brand Suites</h3>
           <p>Luxury visual identities, concept redesigns (Pepsi, Starbucks, Nescafé), and complete brand systems.</p>
@@ -1114,6 +1203,7 @@
     </div>
     <div class="cards-grid reveal-stagger">
       <div class="card">
+        <div class="card-shine"></div>
         <div>
           <div class="card-icon-row">
             <div class="card-icon" style="background:rgba(255,140,66,0.08);color:var(--accent-orange);"><i class="fa-solid fa-film"></i></div>
@@ -1127,6 +1217,7 @@
         </a>
       </div>
       <div class="card">
+        <div class="card-shine"></div>
         <div>
           <div class="card-icon-row">
             <div class="card-icon" style="background:rgba(0,122,255,0.08);color:var(--accent);"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
@@ -1140,6 +1231,7 @@
         </a>
       </div>
       <div class="card">
+        <div class="card-shine"></div>
         <div>
           <div class="card-icon-row">
             <div class="card-icon" style="background:rgba(124,58,237,0.08);color:var(--accent-violet);"><i class="fa-solid fa-video"></i></div>
@@ -1164,6 +1256,7 @@
     </div>
     <div class="cards-grid reveal-stagger">
       <div class="card">
+        <div class="card-shine"></div>
         <div>
           <div class="card-icon-row">
             <div class="card-icon" style="background:rgba(0,122,255,0.08);color:var(--accent);"><i class="fa-solid fa-photo-film"></i></div>
@@ -1177,6 +1270,7 @@
         </a>
       </div>
       <div class="card">
+        <div class="card-shine"></div>
         <div>
           <div class="card-icon-row">
             <div class="card-icon" style="background:rgba(124,58,237,0.08);color:var(--accent-violet);"><i class="fa-solid fa-utensils"></i></div>
@@ -1190,6 +1284,7 @@
         </a>
       </div>
       <div class="card">
+        <div class="card-shine"></div>
         <div>
           <div class="card-icon-row">
             <div class="card-icon" style="background:rgba(255,140,66,0.08);color:var(--accent-orange);"><i class="fa-solid fa-bullhorn"></i></div>
@@ -1214,6 +1309,7 @@
     </div>
     <div class="cards-grid reveal-stagger">
       <div class="card">
+        <div class="card-shine"></div>
         <div>
           <div class="card-icon-row">
             <div class="card-icon" style="background:rgba(255,140,66,0.08);color:var(--accent-orange);"><i class="fa-solid fa-gem"></i></div>
@@ -1227,6 +1323,7 @@
         </a>
       </div>
       <div class="card">
+        <div class="card-shine"></div>
         <div>
           <div class="card-icon-row">
             <div class="card-icon" style="background:rgba(124,58,237,0.08);color:var(--accent-violet);"><i class="fa-solid fa-crown"></i></div>
@@ -1240,6 +1337,7 @@
         </a>
       </div>
       <div class="card">
+        <div class="card-shine"></div>
         <div>
           <div class="card-icon-row">
             <div class="card-icon" style="background:rgba(124,58,237,0.08);color:var(--accent-violet);"><i class="fa-solid fa-mug-hot"></i></div>
@@ -1253,6 +1351,7 @@
         </a>
       </div>
       <div class="card">
+        <div class="card-shine"></div>
         <div>
           <div class="card-icon-row">
             <div class="card-icon" style="background:rgba(48,209,88,0.08);color:#1a9d4f;"><i class="fa-solid fa-tree"></i></div>
@@ -1266,6 +1365,7 @@
         </a>
       </div>
       <div class="card">
+        <div class="card-shine"></div>
         <div>
           <div class="card-icon-row">
             <div class="card-icon" style="background:rgba(0,122,255,0.08);color:var(--accent);"><i class="fa-solid fa-bottle-water"></i></div>
@@ -1279,6 +1379,7 @@
         </a>
       </div>
       <div class="card">
+        <div class="card-shine"></div>
         <div>
           <div class="card-icon-row">
             <div class="card-icon" style="background:rgba(48,209,88,0.08);color:#1a9d4f;"><i class="fa-solid fa-mug-saucer"></i></div>
@@ -1303,6 +1404,7 @@
     </div>
     <div class="cards-grid reveal-stagger">
       <div class="card">
+        <div class="card-shine"></div>
         <div>
           <div class="card-icon-row">
             <div class="card-icon" style="background:rgba(255,59,48,0.08);color:#ff3b30;"><i class="fa-brands fa-youtube"></i></div>
@@ -1316,6 +1418,7 @@
         </a>
       </div>
       <div class="card">
+        <div class="card-shine"></div>
         <div>
           <div class="card-icon-row">
             <div class="card-icon" style="background:rgba(124,58,237,0.08);color:var(--accent-violet);"><i class="fa-solid fa-om"></i></div>
@@ -1329,6 +1432,7 @@
         </a>
       </div>
       <div class="card">
+        <div class="card-shine"></div>
         <div>
           <div class="card-icon-row">
             <div class="card-icon" style="background:rgba(0,122,255,0.08);color:var(--accent);"><i class="fa-brands fa-facebook-f"></i></div>
@@ -1435,16 +1539,21 @@
   <script>
     // ===== Tab Switching =====
     function switchTab(tabId) {
-      document.querySelectorAll('.tab-section').forEach(el => el.classList.remove('active'));
-      const target = document.getElementById('tab-' + tabId);
-      if (target) target.classList.add('active');
+      const overlay = document.getElementById('pageTransition');
+      overlay.classList.add('active');
+      setTimeout(() => {
+        document.querySelectorAll('.tab-section').forEach(el => el.classList.remove('active'));
+        const target = document.getElementById('tab-' + tabId);
+        if (target) target.classList.add('active');
 
-      document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.toggle('active', link.dataset.tab === tabId);
-      });
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.classList.toggle('active', link.dataset.tab === tabId);
+        });
 
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      requestAnimationFrame(() => triggerReveals());
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        requestAnimationFrame(() => triggerReveals());
+        setTimeout(() => overlay.classList.remove('active'), 100);
+      }, 200);
     }
 
     // ===== Mobile Nav =====
@@ -1528,6 +1637,7 @@
 
     // ===== Parallax Effect =====
     let parallaxElements = [];
+    let heroGlows = [];
     let scrollTicking = false;
     function updateParallax() {
       parallaxElements.forEach(el => {
@@ -1537,11 +1647,24 @@
           el.style.transform = `translateY(${offset}px) scale(1.1)`;
         }
       });
+      heroGlows.forEach((el, i) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.bottom > -200 && rect.top < window.innerHeight) {
+          const offset = (rect.top - window.innerHeight / 2) * (0.04 + i * 0.02);
+          const baseTransform = el.classList.contains('hero-glow-1') ? 'translateX(-50%)' : '';
+          el.style.transform = `${baseTransform} translateY(${offset}px)`;
+        }
+      });
       scrollTicking = false;
     }
     function onScroll() {
       const nav = document.getElementById('nav');
       nav.classList.toggle('scrolled', window.scrollY > 40);
+      // Scroll progress bar
+      const scrollProgress = document.getElementById('scrollProgress');
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+      scrollProgress.style.width = progress + '%';
       if (!scrollTicking) { requestAnimationFrame(updateParallax); scrollTicking = true; }
     }
 
@@ -1592,13 +1715,17 @@
 
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         parallaxElements = Array.from(document.querySelectorAll('.parallax-img'));
-        if (parallaxElements.length > 0) {
-          window.addEventListener('scroll', onScroll, { passive: true });
-          updateParallax();
-        } else {
-          window.addEventListener('scroll', onScroll, { passive: true });
-        }
+        heroGlows = Array.from(document.querySelectorAll('.hero-glow'));
+        window.addEventListener('scroll', onScroll, { passive: true });
+        updateParallax();
         onScroll();
+      } else {
+        window.addEventListener('scroll', () => {
+          const scrollProgress = document.getElementById('scrollProgress');
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+          scrollProgress.style.width = progress + '%';
+        }, { passive: true });
       }
     });
   </script>
